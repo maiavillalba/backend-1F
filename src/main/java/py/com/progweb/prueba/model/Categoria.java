@@ -43,6 +43,7 @@ public class Categoria {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+<<<<<<< HEAD
 
     @Override
     public int hashCode() {
@@ -68,4 +69,6 @@ public class Categoria {
         return "py.fpuna.backend.domain.Categoria[ idCategoria=" + idCategoria + " ]";
     }
 
+=======
+>>>>>>> respaldo-initial
 }
