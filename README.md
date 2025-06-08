@@ -1,4 +1,4 @@
-# ECOMMERCE-BACKEND
+# REGISTRO TALLER MECANICO-BACKEND
 
 Este es un proyecto que realiza la implementación de un backend utilizando JEE y Wildfly. Ademas se utiliza PostgreSQL y Postamn para las pruebas de la API.
 
@@ -53,7 +53,7 @@ El valor de ``<datasource jndi-name="java:jboss/datasources/bd"`` debe coincidir
 
 6- Luego puede iniciar el servidor Wildfly ejecutando la linea:
 ```cmd
-C:\path\wildfly-xx.x.x.Final\bin>standalone.bat
+C:\path\wildfly-xx.x.x.Final\bin\standalone.bat
 ```
 
 

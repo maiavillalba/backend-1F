@@ -1,20 +1,21 @@
 package py.com.progweb.prueba.ejb;
 
 import py.com.progweb.prueba.model.Cliente;
-import java.util.List;
+
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import java.util.List;
 
 @Stateless
 public class ClienteDAOImpl implements ClienteDAO {
 
     @PersistenceContext(unitName = "pruebaPU")
     private EntityManager entityManager;
-    
+
     @Override
     public List<Cliente> findAllClientes() {
-        return entityManager.createNamedQuery("Cliente.findAll", Cliente.class).getResultList(); 
+        return entityManager.createNamedQuery("Cliente.findAll", Cliente.class).getResultList();
     }
 
     @Override
@@ -30,13 +31,6 @@ public class ClienteDAOImpl implements ClienteDAO {
     }
 
     @Override
-    public List<Cliente> findClienteByApellido(Cliente cliente) {
-        return entityManager.createNamedQuery("Cliente.findByApellido", Cliente.class)
-                .setParameter("apellido", cliente.getApellido())
-                .getResultList();
-    }
-
-    @Override
     public Cliente findClienteByCedula(Cliente cliente) {
         return entityManager.createNamedQuery("Cliente.findByCedula", Cliente.class)
                 .setParameter("cedula", cliente.getCedula())
@@ -44,10 +38,17 @@ public class ClienteDAOImpl implements ClienteDAO {
     }
 
     @Override
-    public Cliente findClienteByEmail(Cliente cliente) {
-        return entityManager.createNamedQuery("Cliente.findByEmail", Cliente.class)
-                .setParameter("email", cliente.getEmail())
-                .getSingleResult();
+    public List<Cliente> findClienteByTelefono(Cliente cliente) {
+        return entityManager.createNamedQuery("Cliente.findByTelefono", Cliente.class)
+                .setParameter("telefono", cliente.getTelefono())
+                .getResultList();
+    }
+
+    @Override
+    public List<Cliente> findClienteByTipoCliente(Cliente cliente) {
+        return entityManager.createNamedQuery("Cliente.findByTipoCliente", Cliente.class)
+                .setParameter("tipo_cliente", cliente.getTipo_cliente())
+                .getResultList();
     }
 
     @Override

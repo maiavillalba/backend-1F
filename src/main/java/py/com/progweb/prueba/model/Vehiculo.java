@@ -97,4 +97,15 @@ public class Vehiculo {
         this.tipo = tipo;
     }
     
+    @Override
+    public boolean equals(Object object) {
+        if (!(object instanceof Vehiculo)) {
+            return false;
+        }
+        Vehiculo other = (Vehiculo) object;
+        if ((this.idVehiculo == null && other.idVehiculo != null) || (this.idVehiculo != null && !this.idVehiculo.equals(other.idVehiculo))) {
+            return false;
+        }
+        return true;
+    }
 }

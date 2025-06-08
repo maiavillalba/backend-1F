@@ -4,16 +4,21 @@ import py.com.progweb.prueba.model.Cliente;
 import java.util.List;
 
 public interface ClienteDAO {
-    
-    public List<Cliente> findAllClientes();
-    public Cliente findClienteById(Cliente cliente);
-    public List<Cliente> findClienteByNombre(Cliente cliente);
-    public List<Cliente> findClienteByApellido(Cliente cliente);
-    public Cliente findClienteByCedula(Cliente cliente);
-    public Cliente findClienteByEmail(Cliente cliente);
 
-    public void insertCliente(Cliente cliente);
-    public void updateCliente(Cliente cliente);
-    public void deleteCliente(Cliente cliente);
-    
+    // Find All Clientes
+    List<Cliente> findAllClientes();
+
+    // Find by ID
+    Cliente findClienteById(Cliente cliente);
+
+    // Find by Nombre, Cedula, Telefono, TipoCliente
+    List<Cliente> findClienteByNombre(Cliente cliente);
+    Cliente findClienteByCedula(Cliente cliente);
+    List<Cliente> findClienteByTelefono(Cliente cliente);
+    List<Cliente> findClienteByTipoCliente(Cliente cliente);
+
+    // Insert, Update, Delete
+    void insertCliente(Cliente cliente);
+    void updateCliente(Cliente cliente);
+    void deleteCliente(Cliente cliente);
 }

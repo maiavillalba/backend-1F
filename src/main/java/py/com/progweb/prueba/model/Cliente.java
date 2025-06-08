@@ -10,9 +10,11 @@ import com.fasterxml.jackson.annotation.JsonRootName;
     @NamedQuery(name = "Cliente.findAll", query = "SELECT c FROM Cliente c"),
     @NamedQuery(name = "Cliente.findByIdCliente", query = "SELECT c FROM Cliente c WHERE c.idCliente = :idCliente"),
     @NamedQuery(name = "Cliente.findByNombre", query = "SELECT c FROM Cliente c WHERE c.nombre = :nombre"),
-    @NamedQuery(name = "Cliente.findByApellido", query = "SELECT c FROM Cliente c WHERE c.apellido = :apellido"),
     @NamedQuery(name = "Cliente.findByCedula", query = "SELECT c FROM Cliente c WHERE c.cedula = :cedula"),
-    @NamedQuery(name = "Cliente.findByEmail", query = "SELECT c FROM Cliente c WHERE c.email = :email")})
+    @NamedQuery(name = "Cliente.findByTelefono", query = "SELECT c FROM Cliente c WHERE c.telefono = :telefono"),
+    @NamedQuery(name = "Cliente.findByTipoCliente", query = "SELECT c FROM Cliente c WHERE c.tipo_cliente = :tipo_cliente")
+})
+
 public class Cliente {
 
     @Id
@@ -24,14 +26,17 @@ public class Cliente {
     @Column(name = "nombre",length = 50)
     private String nombre;
 
-    @Column(name = "apellido",length = 50)
-    private String apellido;
+    @Column(name = "direccion",length = 100)
+    private String direccion;
+
+    @Column(name = "telefono",length = 50, unique = true)
+    private String telefono;
 
     @Column(name = "cedula",length = 50, unique = true)
     private String cedula;
 
-    @Column(name = "email",length = 50, unique = true)
-    private String email;
+    @Column(name = "tipo_cliente", length = 100)
+    private String tipo_cliente;
 
 
     public Cliente() {}
@@ -56,13 +61,14 @@ public class Cliente {
         this.nombre = nombre;
     }
 
-    public String getApellido() {
-        return apellido;
+    public String getDireccion() {
+        return direccion;
     }
 
-    public void setApellido(String apellido) {
-        this.apellido = apellido;
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
+
 
     public String getCedula() {
         return cedula;
@@ -72,38 +78,17 @@ public class Cliente {
         this.cedula = cedula;
     }
 
-    public String getEmail() {
-        return email;
+    public String getTelefono() {
+        return telefono;
+    }
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
+    }
+    public String getTipo_cliente() {
+        return tipo_cliente;
+    }
+    public void setTipo_cliente(String tipo_cliente) {
+        this.tipo_cliente = tipo_cliente;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (idCliente != null ? idCliente.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Cliente)) {
-            return false;
-        }
-        Cliente other = (Cliente) object;
-        if ((this.idCliente == null && other.idCliente != null) || (this.idCliente != null && !this.idCliente.equals(other.idCliente))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return "py.fpuna.backend.domain.Cliente[ idCliente=" + idCliente + " ]";
-    }
-    
 }
