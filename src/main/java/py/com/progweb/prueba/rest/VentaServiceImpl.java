@@ -6,7 +6,11 @@ import py.com.progweb.prueba.model.Cliente;
 import py.com.progweb.prueba.ejb.VentasDAO;
 import py.com.progweb.prueba.model.VentaCabecera;
 import py.com.progweb.prueba.dto.VentaCabeceraDTO;
+<<<<<<< HEAD
 
+=======
+import py.com.progweb.prueba.dto.VentaDetalleDTO;
+>>>>>>> respaldo-initial
 import py.com.progweb.prueba.model.VentaDetalle;
 
 import javax.ejb.Stateless;
@@ -21,7 +25,11 @@ public class VentaServiceImpl implements VentaService {
 
     @EJB
     private VentasDAO ventasDAO;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> respaldo-initial
     @EJB
     private ProductoDao productoDAO;
 
@@ -29,6 +37,7 @@ public class VentaServiceImpl implements VentaService {
     private EntityManager entityManager;
 
     @Override
+<<<<<<< HEAD
 public List<VentaCabeceraDTO> listarVentas(String fecha, Long clienteId) {
     String queryString = "SELECT new py.com.progweb.prueba.dto.VentaCabeceraDTO(v.idVenta, v.fecha, v.total, v.cliente.idCliente, v.cliente.nombre, v.cliente.apellido) " +
                          "FROM VentaCabecera v WHERE 1=1";
@@ -54,11 +63,52 @@ public List<VentaCabeceraDTO> listarVentas(String fecha, Long clienteId) {
 
 
 
+=======
+    public List<VentaCabeceraDTO> listarVentas(String fecha, Long clienteId) {
+        String queryString = "SELECT new py.com.progweb.prueba.dto.VentaCabeceraDTO(v.idVenta, v.fecha, v.total, v.cliente.idCliente, v.cliente.nombre, v.cliente.apellido) "
+                +
+                "FROM VentaCabecera v WHERE 1=1";
+
+        if (fecha != null && !fecha.trim().isEmpty()) {
+            queryString += " AND DATE(v.fecha) = :fecha";
+        }
+        if (clienteId != null) {
+            queryString += " AND v.cliente.idCliente = :clienteId";
+        }
+
+        TypedQuery<VentaCabeceraDTO> query = entityManager.createQuery(queryString, VentaCabeceraDTO.class);
+
+        if (fecha != null && !fecha.trim().isEmpty()) {
+            query.setParameter("fecha", java.sql.Date.valueOf(fecha));
+        }
+        if (clienteId != null) {
+            query.setParameter("clienteId", clienteId);
+        }
+
+        return query.getResultList();
+    }
+
+    @Override
+    public List<VentaDetalleDTO> listarDetallesVenta(Long idVenta) {
+        String queryString = "SELECT new py.com.progweb.prueba.dto.VentaDetalleDTO(" +
+                "vd.idVentaDetalle, vd.producto.idProducto, vd.producto.nombre, vd.producto.categoria.idCategoria, vd.producto.categoria.nombre, vd.cantidad, vd.precio, (vd.cantidad * vd.precio)) " +
+                "FROM VentaDetalle vd WHERE vd.venta.idVenta = :idVenta";
+
+        TypedQuery<VentaDetalleDTO> query = entityManager.createQuery(queryString, VentaDetalleDTO.class);
+        query.setParameter("idVenta", idVenta);
+
+        return query.getResultList();
+    }
+>>>>>>> respaldo-initial
 
     @Override
     public void realizarVenta(Cliente cliente, List<VentaDetalle> detalles) throws Exception {
         double totalVenta = 0.0;
+<<<<<<< HEAD
         
+=======
+
+>>>>>>> respaldo-initial
         // Validar stock de productos
         for (VentaDetalle detalle : detalles) {
             Producto producto = productoDAO.findProductoById(detalle.getProducto().getIdProducto());
@@ -74,7 +124,10 @@ public List<VentaCabeceraDTO> listarVentas(String fecha, Long clienteId) {
             detalle.setPrecio(producto.getPrecioVenta());
             totalVenta += detalle.getSubtotal();
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> respaldo-initial
             producto.setCantidadExistente(producto.getCantidadExistente() - detalle.getCantidad());
         }
 
@@ -82,7 +135,11 @@ public List<VentaCabeceraDTO> listarVentas(String fecha, Long clienteId) {
         VentaCabecera venta = new VentaCabecera();
         venta.setCliente(cliente);
         venta.setFecha(new java.util.Date());
+<<<<<<< HEAD
         venta.setTotal(totalVenta); 
+=======
+        venta.setTotal(totalVenta);
+>>>>>>> respaldo-initial
 
         ventasDAO.registrarVenta(venta);
         entityManager.flush();

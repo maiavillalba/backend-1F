@@ -106,6 +106,7 @@ public class VentaCabecera {
     public void calcularTotalVenta() {
         this.total = this.calcularTotal();
     }
+<<<<<<< HEAD
 
     @Override
     public int hashCode() {
@@ -125,4 +126,6 @@ public class VentaCabecera {
         }
         return true;
     }
+=======
+>>>>>>> respaldo-initial
 }

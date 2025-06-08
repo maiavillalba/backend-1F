@@ -6,9 +6,8 @@ import javax.ejb.Stateless;
 import javax.ejb.EJB;
 import java.util.List;
 
-
 @Stateless
-public class ClienteServiceImpl implements ClienteService{
+public class ClienteServiceImpl implements ClienteService {
 
     @EJB
     private ClienteDAO clienteDAO;
@@ -33,13 +32,6 @@ public class ClienteServiceImpl implements ClienteService{
     }
 
     @Override
-    public List<Cliente> getClienteByApellido(String apellido) {
-        Cliente cliente = new Cliente();
-        cliente.setApellido(apellido);
-        return clienteDAO.findClienteByApellido(cliente);
-    }
-
-    @Override
     public Cliente getClienteByCedula(String cedula) {
         Cliente cliente = new Cliente();
         cliente.setCedula(cedula);
@@ -47,10 +39,17 @@ public class ClienteServiceImpl implements ClienteService{
     }
 
     @Override
-    public Cliente getClienteByEmail(String email) {
+    public List<Cliente> getClienteByTelefono(String telefono) {
         Cliente cliente = new Cliente();
-        cliente.setEmail(email);
-        return clienteDAO.findClienteByEmail(cliente);
+        cliente.setTelefono(telefono);
+        return clienteDAO.findClienteByTelefono(cliente);
+    }
+
+    @Override
+    public List<Cliente> getClienteByTipoCliente(String tipoCliente) {
+        Cliente cliente = new Cliente();
+        cliente.setTipo_cliente(tipoCliente);
+        return clienteDAO.findClienteByTipoCliente(cliente);
     }
 
     @Override
@@ -64,9 +63,7 @@ public class ClienteServiceImpl implements ClienteService{
     }
 
     @Override
-    public void deleteCliente(Long idCliente) {
-        Cliente cliente = new Cliente();
-        cliente.setIdCliente(idCliente);
+    public void deleteCliente(Cliente cliente) {
         clienteDAO.deleteCliente(cliente);
     }
 }
