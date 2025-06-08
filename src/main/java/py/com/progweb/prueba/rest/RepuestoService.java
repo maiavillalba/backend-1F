@@ -13,18 +13,12 @@ public interface RepuestoService {
     // Find by ID
     public Repuesto encontrarRepuestoPorId(Integer id);
 
-    // Find by Nombre
+    // Find by Nombre, Codigo
     public List<Repuesto> encontrarRepuestoPorNombre(Repuesto repuesto);
-
-    // Find by Codigo
     public List<Repuesto> encontrarRepuestoPorCodigo(Repuesto repuesto);
 
-    // Insert
+    // Insert, Update, Delete
     public void registrarRepuesto(Repuesto repuesto);
-
-    // Update
     public void modificarRepuesto(Repuesto repuesto);
-
-    // Delete
     public void eliminarRepuesto(Repuesto repuesto);
 }

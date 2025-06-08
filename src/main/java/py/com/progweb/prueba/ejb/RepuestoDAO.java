@@ -11,18 +11,12 @@ public interface RepuestoDAO {
     // Find by ID
     public Repuesto findRepuestoById(Integer id);
 
-    // Find by Nombre 
+    // Find by Nombre, Codigo
     public List<Repuesto> findRepuestoByNombre(Repuesto repuesto);
-
-    // Find by Codigo
     public List<Repuesto> findRepuestoByCodigo(Repuesto repuesto);
 
-    // Insert
+    // Insert, Update, Delete
     public void insertRepuesto(Repuesto repuesto);
-
-    // Update
     public void updateRepuesto(Repuesto repuesto);
-
-    // Delete
     public void deleteRepuesto(Repuesto repuesto);
 }
