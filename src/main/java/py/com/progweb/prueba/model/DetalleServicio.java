@@ -2,6 +2,8 @@ package py.com.progweb.prueba.model;
 
 import javax.persistence.*;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @Entity
@@ -26,6 +28,7 @@ public class DetalleServicio {
 
     @ManyToOne
     @JoinColumn(name = "id_servicio", nullable = false)
+    @JsonBackReference
     private Servicio servicio;
 
     @ManyToMany

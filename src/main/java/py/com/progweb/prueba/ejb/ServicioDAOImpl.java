@@ -5,6 +5,7 @@ import javax.persistence.*;
 import java.util.List;
 import java.util.Date;
 
+import py.com.progweb.prueba.model.DetalleServicio;
 import py.com.progweb.prueba.model.Servicio;
 
 @Stateless
@@ -15,29 +16,46 @@ public class ServicioDAOImpl implements ServicioDAO {
 
     @Override
     public List<Servicio> findAllServicios() {
-        return em.createNamedQuery("Servicio.findAll", Servicio.class).getResultList();
+        return em.createQuery(
+            "SELECT DISTINCT s FROM Servicio s " +
+            "LEFT JOIN FETCH s.detalles d", Servicio.class
+        ).getResultList();
     }
+
+
 
     @Override
     public Servicio findServicioById(Integer id) {
-        return em.find(Servicio.class, id);
+        try {
+            return em.createQuery(
+                "SELECT DISTINCT s FROM Servicio s " +
+                "LEFT JOIN FETCH s.detalles d " +
+                "LEFT JOIN FETCH d.repuestos " +
+                "LEFT JOIN FETCH d.mecanicos " +
+                "WHERE s.idServicio = :id", Servicio.class)
+                .setParameter("id", id)
+                .getSingleResult();
+        } catch (NoResultException e) {
+            return null;
+        }
     }
 
     @Override
     public List<Servicio> findServiciosByVehiculoId(Integer idVehiculo) {
-        List<Servicio> servicios = em.createNamedQuery("Servicio.findByVehiculo", Servicio.class)
-                 .setParameter("idVehiculo", idVehiculo)
-                 .getResultList();
-
-        if (servicios.isEmpty()) {
-            System.out.println("No se encontraron servicios para el vehiculo con ID: " + idVehiculo);
-        }
-        return servicios;
+        return em.createQuery(
+            "SELECT DISTINCT s FROM Servicio s " +
+            "LEFT JOIN FETCH s.detalles d " +
+            "WHERE s.vehiculo.idVehiculo = :idVehiculo", Servicio.class)
+            .setParameter("idVehiculo", idVehiculo)
+            .getResultList();
     }
+
 
     @Override
     public List<Servicio> buscarServicios(Integer idCliente, Date fecha) {
-        StringBuilder sb = new StringBuilder("SELECT s FROM Servicio s WHERE 1=1 ");
+        StringBuilder sb = new StringBuilder(
+            "SELECT DISTINCT s FROM Servicio s LEFT JOIN FETCH s.detalles d WHERE 1=1 "
+        );
         if (idCliente != null) {
             sb.append("AND s.vehiculo.cliente.idCliente = :idCliente ");
         }
@@ -48,13 +66,15 @@ public class ServicioDAOImpl implements ServicioDAO {
         TypedQuery<Servicio> query = em.createQuery(sb.toString(), Servicio.class);
 
         if (idCliente != null) {
-            query.setParameter("idCliente", idCliente);
+            query.setParameter("idCliente", Long.valueOf(idCliente));
         }
         if (fecha != null) {
             query.setParameter("fecha", fecha, TemporalType.DATE);
         }
+
         return query.getResultList();
     }
+
 
     public Servicio buscarServicioConDetalles(Integer idServicio) {
         return em.createQuery(
@@ -66,8 +86,14 @@ public class ServicioDAOImpl implements ServicioDAO {
 
     @Override
     public void insertServicio(Servicio servicio) {
+        if (servicio.getDetalles() != null) {
+            for (DetalleServicio detalle : servicio.getDetalles()) {
+                detalle.setServicio(servicio);
+            }
+        }
         em.persist(servicio);
     }
+
 
     @Override
     public void updateServicio(Servicio servicio) {

@@ -2,12 +2,15 @@ package py.com.progweb.prueba.rest;
 
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
 
+import py.com.progweb.prueba.dto.ServicioDTO;
+import py.com.progweb.prueba.dto.ServicioMapper;
 import py.com.progweb.prueba.model.Servicio;
 
 @Path("/servicios")
@@ -23,20 +26,30 @@ public class ServicioServiceRS {
     public Response listarServicios() {
         List<Servicio> servicios = servicioService.listarServicios();
         if (servicios == null || servicios.isEmpty()) {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity("No existen servicios registrados")
+                    .build();
         }
-        return Response.ok(servicios).build();
+
+        List<ServicioDTO> serviciosDTO = servicios.stream()
+            .map(ServicioMapper::toDTO)
+            .collect(Collectors.toList());
+
+        return Response.ok(serviciosDTO).build();
     }
+
 
     @GET
     @Path("/{id}")
     public Response encontrarServicioPorId(@PathParam("id") Integer id) {
-        Servicio servicio = servicioService.encontrarServicioPorId(id);
+        Servicio servicio = servicioService.buscarServicioConDetalles(id);
         if (servicio == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-        return Response.ok(servicio).build();
+        ServicioDTO dto = ServicioMapper.toDTO(servicio);
+        return Response.ok(dto).build();
     }
+
 
     @GET
     @Path("/vehiculo/{idVehiculo}")
@@ -45,31 +58,48 @@ public class ServicioServiceRS {
         if (servicios == null || servicios.isEmpty()) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
-        return Response.ok(servicios).build();
+
+        List<ServicioDTO> serviciosDTO = servicios.stream()
+            .map(ServicioMapper::toDTO)
+            .collect(Collectors.toList());
+
+        return Response.ok(serviciosDTO).build();
     }
+
 
     @GET
     @Path("/filtros")
     public Response buscarServiciosConFiltros(@QueryParam("idCliente") Integer idCliente,
-                                              @QueryParam("fecha") String fechaStr) {
+                                            @QueryParam("fecha") String fechaStr) {
         try {
             Date fecha = null;
-            if (fechaStr != null && !fechaStr.isEmpty()) {
-                fecha = javax.xml.bind.DatatypeConverter.parseDate(fechaStr).getTime();
+
+            if (fechaStr != null && !fechaStr.trim().isEmpty()) {
+                try {
+                    fecha = javax.xml.bind.DatatypeConverter.parseDate(fechaStr).getTime();
+                } catch (IllegalArgumentException ex) {
+                    return Response.status(Response.Status.BAD_REQUEST)
+                            .entity("Formato de fecha inválido. Use yyyy-MM-dd.").build();
+                }
             }
 
             List<Servicio> resultados = servicioService.buscarServicios(idCliente, fecha);
-            if (resultados.isEmpty()) {
+            if (resultados == null || resultados.isEmpty()) {
                 return Response.status(Response.Status.NOT_FOUND).build();
             }
-            return Response.ok(resultados).build();
+
+            List<ServicioDTO> dtos = resultados.stream()
+                    .map(ServicioMapper::toDTO)
+                    .collect(Collectors.toList());
+
+            return Response.ok(dtos).build();
+
         } catch (Exception e) {
             e.printStackTrace(System.out);
-            return Response.status(Response.Status.BAD_REQUEST)
-                    .entity("Error al procesar la fecha. Formato esperado: yyyy-MM-dd")
-                    .build();
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
         }
     }
+
 
     @GET
     @Path("/{id}/detalles")

@@ -4,6 +4,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
+
 import py.com.progweb.prueba.model.Repuesto;
 
 @Path("/repuestos")
@@ -15,8 +16,15 @@ public class RepuestoServiceRS {
     private RepuestoService repuestoService;
 
     @GET
-    public List<Repuesto> listarRepuestos() {
-        return repuestoService.listarRepuestos();
+    public Response listarRepuestos() {
+        List<Repuesto> repuestos = repuestoService.listarRepuestos();
+        if (repuestos == null || repuestos.isEmpty()) {
+            return Response.status(Response.Status.NOT_FOUND)
+                    .entity("No existe una lista de repuestos")
+                    .build();
+        }
+        return Response.ok(repuestos).build();
+
     }
 
     @GET

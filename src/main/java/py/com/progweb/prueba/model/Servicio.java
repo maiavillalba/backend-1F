@@ -3,6 +3,8 @@ package py.com.progweb.prueba.model;
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 @Entity
@@ -38,6 +40,7 @@ public class Servicio {
     private Vehiculo vehiculo;
 
     @OneToMany(mappedBy = "servicio", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<DetalleServicio> detalles;
 
     public Servicio() {}
