@@ -40,11 +40,11 @@ public class MecanicoServiceRS {
     @GET
     @Path("/nombre/{nombre}")
     public Response getByNombre(@PathParam("nombre") String nombre) {
-        List<Mecanico> mecanico = mecanicoService.getByNombre(nombre);
-        if (mecanico.isEmpty()) {
-            return Response.status(Response.Status.NOT_FOUND).entity("Mecanico no encontrado").build();
+        List<Mecanico> mecanicos = mecanicoService.getByNombre(nombre);
+        if (mecanicos == null || mecanicos.isEmpty()) {
+            return Response.status(Response.Status.NOT_FOUND).entity("No se encontraron mecanicos con ese nombre").build();
         }
-        return Response.ok(mecanico).build();
+        return Response.ok(mecanicos).build();
     }
 
     @POST
