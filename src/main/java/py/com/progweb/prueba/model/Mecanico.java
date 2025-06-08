@@ -3,6 +3,8 @@ package py.com.progweb.prueba.model;
 import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonRootName;
 import java.util.Date;
+import java.time.LocalDate;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 @Entity
 @Table(name = "mecanico")
@@ -27,9 +29,9 @@ public class Mecanico {
     @Column(name = "telefono", length = 50)
     private String telefono;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @Column(name = "fecha_ingreso")
-    @Temporal(TemporalType.DATE)
-    private Date fechaIngreso;
+    private LocalDate fechaIngreso;
 
     @Column(name = "especialidad", length = 100)
     private String especialidad;
@@ -70,11 +72,11 @@ public class Mecanico {
         this.telefono = telefono;
     }
 
-    public Date getFechaIngreso() {
+    public LocalDate getFechaIngreso() {
         return fechaIngreso;
     }
 
-    public void setFechaIngreso(Date fechaIngreso) {
+    public void setFechaIngreso(LocalDate fechaIngreso) {
         this.fechaIngreso = fechaIngreso;
     }
 
