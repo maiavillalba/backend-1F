@@ -7,19 +7,10 @@ public interface ClienteService {
     public List<Cliente> getAllClientes();
     public Cliente getClienteById(Long idCliente);
     public List<Cliente> getClienteByNombre(String nombre);
-<<<<<<< HEAD
-    public List<Cliente> getClienteByApellido(String apellido);
-    public Cliente getClienteByCedula(String cedula);
-    public Cliente getClienteByEmail(String email);
-    public void addCliente(Cliente cliente);
-    public void updateCliente(Cliente cliente);
-    public void deleteCliente(Long idCliente);
-=======
     public Cliente getClienteByCedula(String cedula);
     public List<Cliente> getClienteByTelefono(String telefono);
     public List<Cliente> getClienteByTipoCliente(String tipoCliente);
     public void addCliente(Cliente cliente);
     public void updateCliente(Cliente cliente);
     public void deleteCliente(Cliente cliente);
->>>>>>> respaldo-initial
 }
