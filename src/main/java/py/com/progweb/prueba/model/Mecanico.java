@@ -2,7 +2,6 @@ package py.com.progweb.prueba.model;
 
 import javax.persistence.*;
 import com.fasterxml.jackson.annotation.JsonRootName;
-import java.util.Date;
 import java.time.LocalDate;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
