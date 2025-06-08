@@ -11,6 +11,9 @@ public interface VehiculoService {
     
     // Find by ID
     public Vehiculo encontrarVehiculoPorId(Integer id);
+
+    // Find by Cliente ID
+    public List<Vehiculo> encontrarVehiculosPorClienteId(Integer idCliente);
     
     // Insert, Update, Delete
     public void registrarVehiculo(Vehiculo vehiculo);

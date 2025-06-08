@@ -28,6 +28,11 @@ public class VehiculoServiceImpl implements VehiculoService {
     }
 
     @Override
+    public List<Vehiculo> encontrarVehiculosPorClienteId(Integer idCliente) {
+        return vehiculoDao.findVehiculoByClienteId(idCliente);
+    }
+
+    @Override
     public void registrarVehiculo(Vehiculo vehiculo) {
         vehiculoDao.insertVehiculo(vehiculo);
     }

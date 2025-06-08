@@ -17,7 +17,7 @@ public class Repuesto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idRepuesto", length = 50)
+    @Column(name = "id_repuesto", length = 50)
     private Integer idRepuesto;
 
     @Column(name = "nombre", length = 100, nullable = false)

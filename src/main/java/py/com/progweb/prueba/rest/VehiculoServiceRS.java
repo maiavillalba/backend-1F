@@ -35,6 +35,16 @@ public class VehiculoServiceRS {
         return Response.ok(vehiculo).build();
     }
 
+    @GET
+    @Path("/cliente/{idCliente}")
+    public Response encontrarVehiculosPorClienteId(@PathParam("idCliente") Integer idCliente) {
+        List<Vehiculo> vehiculos = vehiculoService.encontrarVehiculosPorClienteId(idCliente);
+        if (vehiculos == null || vehiculos.isEmpty()) {
+            return Response.status(Response.Status.NOT_FOUND).build();
+        }
+        return Response.ok(vehiculos).build();
+    }
+
     @POST
     public Response registrarVehiculo(Vehiculo vehiculo) {
         try {

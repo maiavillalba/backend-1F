@@ -17,7 +17,7 @@ public class Vehiculo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "idVehiculo", length = 50)
+    @Column(name = "id_vehiculo", length = 50)
     private Integer idVehiculo;
 
     @Column(name = "marca", length = 100)
@@ -34,6 +34,10 @@ public class Vehiculo {
 
     @Column(name = "tipo", length = 50)
     private String tipo;
+
+    @ManyToOne
+    @JoinColumn(name = "id_cliente", nullable = false)
+    private Cliente cliente;
 
     public Vehiculo() {}
 
@@ -95,6 +99,14 @@ public class Vehiculo {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
     
     @Override

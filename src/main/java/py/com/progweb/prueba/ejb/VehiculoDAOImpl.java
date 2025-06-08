@@ -36,6 +36,19 @@ public class VehiculoDAOImpl implements VehiculoDAO {
     }
 
     @Override
+    public List<Vehiculo> findVehiculoByClienteId(Integer idCliente) {
+        List<Vehiculo> vehiculos = em.createQuery("SELECT v FROM Vehiculo v WHERE v.cliente.idCliente = :idCliente", Vehiculo.class)
+                .setParameter("idCliente", idCliente)
+                .getResultList();
+
+        if (vehiculos.isEmpty()) {
+            System.out.println("No se encontraron vehiculos para el cliente con ID: " + idCliente);
+        }
+
+        return vehiculos;
+    }
+
+    @Override
     public void insertVehiculo(Vehiculo vehiculo) {
         em.persist(vehiculo);
     }

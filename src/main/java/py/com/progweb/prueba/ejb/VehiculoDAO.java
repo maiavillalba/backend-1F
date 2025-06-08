@@ -1,12 +1,11 @@
 package py.com.progweb.prueba.ejb;
 
 import java.util.List;
-
 import py.com.progweb.prueba.model.Vehiculo;
 
 public interface VehiculoDAO {
 
-    // Find All Vehiculos
+    // Find All 
     public List<Vehiculo> findAllVehiculos();
 
     // Find by ID
@@ -14,6 +13,9 @@ public interface VehiculoDAO {
     
     // Find by Numero Chapa
     public List<Vehiculo> findVehiculoByNumeroChapa(String numeroChapa);
+
+    // Find by Cliente ID
+    public List<Vehiculo> findVehiculoByClienteId(Integer idCliente);
     
     // Insert, Update, Delete
     public void insertVehiculo(Vehiculo vehiculo);
