@@ -2,6 +2,7 @@ package py.com.progweb.prueba.rest;
 
 import py.com.progweb.prueba.model.Cliente;
 import py.com.progweb.prueba.ejb.ClienteDAO;
+
 import javax.ejb.Stateless;
 import javax.ejb.EJB;
 import java.util.List;

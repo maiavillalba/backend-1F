@@ -1,18 +1,11 @@
 package py.com.progweb.prueba.ejb;
 
 import py.com.progweb.prueba.model.Cliente;
-<<<<<<< HEAD
-import java.util.List;
-import javax.ejb.Stateless;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-=======
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
->>>>>>> respaldo-initial
 
 @Stateless
 public class ClienteDAOImpl implements ClienteDAO {

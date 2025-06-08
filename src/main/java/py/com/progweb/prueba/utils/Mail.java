@@ -1,5 +1,6 @@
-package py.com.progweb.prueba.utils;
+/* package py.com.progweb.prueba.utils;
 
+import java.net.PasswordAuthentication;
 import java.util.Properties;
 import javax.mail.*;
 import javax.mail.internet.*;
@@ -36,4 +37,4 @@ public class Mail {
         }
     }
 
-}
+} */

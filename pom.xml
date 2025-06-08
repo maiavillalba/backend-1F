@@ -85,14 +85,6 @@
 			<version>2.3.1</version>
 		</dependency>
 
-<<<<<<< HEAD
-=======
-		<dependency>
-			<groupId>com.sun.mail</groupId>
-			<artifactId>javax.mail</artifactId>
-			<version>1.6.2</version>
-		</dependency>
->>>>>>> respaldo-initial
 
 	</dependencies>
 	<repositories>

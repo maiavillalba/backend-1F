@@ -17,13 +17,9 @@ import java.io.Serializable;
     @NamedQuery(name = "Producto.findByNombreAndCategoria",
                 query = "SELECT p FROM Producto p WHERE LOWER(p.nombre) LIKE LOWER(:nombre) AND p.categoria IS NOT NULL AND p.categoria.idCategoria = :idCategoria")
 })
-<<<<<<< HEAD
 public class Producto implements Serializable {
 
     private static final long serialVersionUID = 1L;
-=======
-public class Producto {
->>>>>>> respaldo-initial
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -78,11 +74,7 @@ public class Producto {
         return categoria;
     }
 
-<<<<<<< HEAD
     public void setIdCategoria(Categoria categoria) {
-=======
-    public void setCategoria(Categoria categoria) {
->>>>>>> respaldo-initial
         this.categoria = categoria;
     }
 
@@ -101,7 +93,6 @@ public class Producto {
     public void setCantidadExistente(int cantidadExistente) {
         this.cantidadExistente = cantidadExistente;
     }
-<<<<<<< HEAD
 
     @Override
     public int hashCode() {
@@ -124,6 +115,4 @@ public class Producto {
         return "Producto{" + "idProducto=" + idProducto + ", nombre=" + nombre + ", categoria=" + categoria + ", precioVenta=" + precioVenta + ", cantidadExistente=" + cantidadExistente + '}';
     }
 
-=======
->>>>>>> respaldo-initial
 }
