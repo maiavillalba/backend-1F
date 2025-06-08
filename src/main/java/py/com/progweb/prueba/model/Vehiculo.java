@@ -40,6 +40,14 @@ public class Vehiculo {
     public Vehiculo(Integer idVehiculo) {
         this.idVehiculo = idVehiculo;
     }
+
+    public Vehiculo(String marca, String numeroChapa, String modelo, Integer anio, String tipo) {
+        this.marca = marca;
+        this.numeroChapa = numeroChapa;
+        this.modelo = modelo;
+        this.anio = anio;
+        this.tipo = tipo;
+    }
     
     public Integer getIdVehiculo() {
         return idVehiculo;
