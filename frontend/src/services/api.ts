@@ -24,7 +24,7 @@ export const repuestoService = {
 
 export const mecanicoService = {
   getAll: async (): Promise<Mecanico[]> => {
-    const response = await api.get("/mecanicos")
+    const response = await api.get("/mecanicos/all")
     return response.data
   },
 }

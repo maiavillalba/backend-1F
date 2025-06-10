@@ -73,8 +73,8 @@ export default function ServiciosList() {
                         Vehículo:{" "}
                         {vehiculoInfo ? `${vehiculoInfo.marca} ${vehiculoInfo.modelo}` : `ID: ${servicio.idVehiculo}`}
                       </p>
-                      {vehiculoInfo?.patente && (
-                        <p className="text-muted-foreground">Patente: {vehiculoInfo.patente}</p>
+                      {vehiculoInfo?.numeroChapa && (
+                        <p className="text-muted-foreground">Patente: {vehiculoInfo.numeroChapa}</p>
                       )}
                     </div>
                   </div>

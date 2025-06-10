@@ -2,14 +2,14 @@ export interface Vehiculo {
   idVehiculo: number
   marca?: string
   modelo?: string
-  patente?: string
+  numeroChapa?: string
   cliente?: string
 }
 
 export interface Repuesto {
   idRepuesto: number
   nombre?: string
-  precio?: number
+  codigo?: number
 }
 
 export interface Mecanico {

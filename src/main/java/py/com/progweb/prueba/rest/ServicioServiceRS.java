@@ -85,7 +85,7 @@ public class ServicioServiceRS {
 
             List<Servicio> resultados = servicioService.buscarServicios(idCliente, fecha);
             if (resultados == null || resultados.isEmpty()) {
-                return Response.status(Response.Status.NOT_FOUND).build();
+                return Response.status(Response.Status.NOT_FOUND).entity("No se han encontrado resultados").build();
             }
 
             List<ServicioDTO> dtos = resultados.stream()

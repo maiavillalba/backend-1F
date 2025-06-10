@@ -137,22 +137,6 @@ export default function ConsultaServicios() {
             </Button>
           </div>
 
-          {/* Filtros Activos */}
-          {(filtros.idCliente || filtros.fecha) && (
-            <div className="mt-4 p-3 bg-muted/50 rounded-lg">
-              <p className="text-sm font-medium mb-2">Filtros activos:</p>
-              <div className="flex flex-wrap gap-2">
-                {filtros.idCliente && filtros.idCliente !== "all" && (
-                  <Badge variant="secondary">
-                    Cliente: {clientes?.find((c) => c.idCliente === Number.parseInt(filtros.idCliente))?.nombre}
-                  </Badge>
-                )}
-                {filtros.fecha && (
-                  <Badge variant="secondary">Fecha: {new Date(filtros.fecha).toLocaleDateString()}</Badge>
-                )}
-              </div>
-            </div>
-          )}
         </CardContent>
       </Card>
 
@@ -160,10 +144,7 @@ export default function ConsultaServicios() {
       {error && (
         <Card>
           <CardContent className="text-center py-8">
-            <p className="text-destructive">Error al cargar los servicios</p>
-            <p className="text-sm text-muted-foreground mt-2">
-              {error instanceof Error ? error.message : "Error desconocido"}
-            </p>
+            <p className="text">No se han encontrado resultados</p>
           </CardContent>
         </Card>
       )}
@@ -216,7 +197,7 @@ export default function ConsultaServicios() {
                                       ? `${vehiculoInfo.marca} ${vehiculoInfo.modelo}`
                                       : `Vehículo ID: ${servicio.idVehiculo}`}
                                   </span>
-                                  {vehiculoInfo?.patente && <span>🏷️ {vehiculoInfo.patente}</span>}
+                                  {vehiculoInfo?.numeroChapa && <span>🏷️ {vehiculoInfo.numeroChapa}</span>}
                                 </div>
                               </div>
                             </div>

@@ -68,8 +68,13 @@ export default function ServicioForm() {
   })
 
   const onSubmit = (data: ServicioFormData) => {
+    // Incrementar la fecha en un día
+    const fechaSeleccionada = new Date(data.fecha)
+    fechaSeleccionada.setDate(fechaSeleccionada.getDate() + 1)
+    const fechaIncrementada = fechaSeleccionada.toISOString().split("T")[0]
+
     const payload: ServicioPayload = {
-      fecha: data.fecha,
+      fecha: fechaIncrementada,
       descripcion: data.descripcion,
       kilometraje: data.kilometraje,
       costoTotal: data.costoTotal,
@@ -166,7 +171,7 @@ export default function ServicioForm() {
                         <SelectContent>
                           {vehiculos?.map((vehiculo) => (
                             <SelectItem key={vehiculo.idVehiculo} value={vehiculo.idVehiculo.toString()}>
-                              {vehiculo.marca} {vehiculo.modelo}
+                              {vehiculo.marca} {vehiculo.modelo} - {vehiculo.numeroChapa} 
                             </SelectItem>
                           ))}
                         </SelectContent>
@@ -322,7 +327,7 @@ export default function ServicioForm() {
                         <SelectContent>
                           {repuestos?.map((repuesto) => (
                             <SelectItem key={repuesto.idRepuesto} value={repuesto.idRepuesto.toString()}>
-                              {repuesto.nombre} - ${repuesto.precio}
+                              {repuesto.nombre} - {repuesto.codigo}
                             </SelectItem>
                           ))}
                         </SelectContent>
